@@ -1,12 +1,12 @@
-import { MainRoute } from './AllRoutes';
-import './App.css';
+import { MainRoute } from "./AllRoutes";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="App">
-      <MainRoute/>
-    </div>
-  );
+	return (
+		<div className="App">
+			<MainRoute />
+		</div>
+	);
 }
 
 export default App;

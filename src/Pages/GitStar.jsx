@@ -7,160 +7,191 @@ import { Pagination } from "../Components/Pagination";
 import { getAllLang, getRepos } from "../Redux/action";
 
 const GitStar = () => {
+	const dispatch = useDispatch();
+	const repos = useSelector((store) => store.repos);
+	const allLan = useSelector((store) => store.allLan);
 
-  const dispatch = useDispatch();
-  const repos = useSelector((store) => store.repos);
-  const allLan = useSelector(store => store.allLan);
+	const [view, setView] = useState(false);
+	const [page, setPage] = useState(1);
+	const [theme, setTheme] = useState(false);
 
-  const [view, setView] = useState(false);
-  const [page, setPage] = useState(1);
-  const [theme, setTheme] = useState(false);
+	const changeView = () => {
+		setView(!view);
+	};
 
-  const changeView = () => {
-    setView(!view);
-  };
+	const handleSearch = (lan) => {
+		dispatch(getRepos(page, lan));
+	};
 
-  const handleSearch = (lan) => {
-    dispatch(getRepos(page, lan));
-  };
+	const handleChangeTheme = () => {
+		setTheme(!theme);
+	};
 
-  const handleChangeTheme = () => {
-    setTheme(!theme);
-  };
+	const handlePageChange = (n) => {
+		setPage((init) => init + n);
+	};
 
-  const handlePageChange = (n) => {
-    setPage((init) => init + n);
-  };
+	useEffect(() => {
+		dispatch(getRepos(page));
+	}, [dispatch, page]);
 
-  useEffect(() => {
-    dispatch(getRepos(page));
-  }, [dispatch, page]);
+	useEffect(() => {
+		if (repos.length === 0) {
+			dispatch(getRepos(page));
+		}
+	}, [dispatch, repos, repos.length]);
 
-  useEffect(() => {
-    if (repos.length === 0) {
-      dispatch(getRepos(page));
-    }
-  }, [dispatch, repos, repos.length]);
+	useEffect(() => {
+		if (allLan.length === 0) {
+			dispatch(getAllLang());
+		}
+	}, [dispatch, allLan, allLan.length]);
 
-  useEffect(() => {
-    if (allLan.length === 0) {
-      dispatch(getAllLang());
-    }
-  }, [dispatch, allLan, allLan.length]);
-
-
-  return (
-    <Box className={theme ? "dark" : "light"}>
-      <Box>
-        <Text
-          className={theme ? "darkText" : "lightText"}
-          fontWeight="bold"
-          fontSize={{base: "150%", sm:"170%", md:"200%",lg:"300%",xl:"300%"}}
-          padding="1%"
-          width="40%"
-          margin="auto"
-          marginTop="1%"
-          boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
-        >
-          Git Stars
-        </Text>
-      </Box>
-      <Box padding="2%" display="flex" justifyContent="space-between" width="95%" margin="auto">
-        <Box display="flex" width="25%" border="0.5px solid black">
-          <Select color={theme ? "white" : "black"} bg={theme ? "black" : "white"} width="100%" placeholder="Search" onChange={(e) => handleSearch(e.target.value)}>
-            {allLan.length > 0 && allLan.map((item, i) => {
-              return (
-                <option style={theme ? { color: 'white', backgroundColor: 'black' } : {color : 'black', backgroundColor: 'white'}} key={i} value={`${item.value}`}>{item.label}</option>
-              );
-            })}
-          </Select>
-        </Box>
-        <Box display="flex" width={{base: "60%", sm:"40%", md:"30%",lg:"20%",xl:"20%"}} justifyContent="space-around">
-          <Button
-            colorScheme={theme ? "black" : "blue"}
-            border="1px solid white"
-            onClick={() => changeView()}
-          >
-            {view ? "Grid View" : "List View"}
-          </Button>
-          <Button
-            colorScheme={theme ? "black" : "pink"}
-            border="1px solid white"
-            onClick={() => handleChangeTheme()}
-          >
-            {theme ? "Light mode" : "Dark mode"}
-          </Button>
-        </Box>
-      </Box>
-      <Box>
-        {repos.length === 0 ? (
-          <Box>Loading...</Box>
-        ) : view ? (
-          <Box
-            display="grid"
-            gridTemplateColumns={{ base: "repeat(1,100%)" }}
-            width="80%"
-            margin="auto"
-          >
-            {repos.map((item) => {
-              return (
-                <ListView
-                  key={item.id}
-                  image={item.owner.avatar_url}
-                  fullname={item.full_name}
-                  name={item.name}
-                  star={item.stargazers_count}
-                  date={item.updated_at}
-                  description={item.description}
-                  fork={item.forks_count}
-                  issues={item.open_issues_count}
-                  themeChange={theme}
-                />
-              );
-            })}
-          </Box>
-        ) : (
-          <Box
-            display="grid"
-            gridTemplateColumns={{
-              base: "repeat(1,100%)",
-              sm: "repeat(2,50%)",
-              md: "repeat(3,33%)",
-              lg: "repeat(4,25%)",
-              xl: "repeat(4,25%)",
-            }}
-            width="95%"
-            margin="auto"
-          >
-            {repos.map((item) => {
-              return (
-                <GridView
-                  key={item.id}
-                  image={item.owner.avatar_url}
-                  fullname={item.full_name}
-                  name={item.name}
-                  star={item.stargazers_count}
-                  date={item.updated_at}
-                  description={item.description}
-                  fork={item.forks_count}
-                  issues={item.open_issues_count}
-                  themeChange={theme}
-                />
-              );
-            })}
-          </Box>
-        )}
-      </Box>
-      <Box>
-        <Pagination
-          onChange={handlePageChange}
-          page={page}
-          total={localStorage.getItem("total")}
-          theme={theme}
-        />
-      </Box>
-    </Box>
-  );
+	return (
+		<Box className={theme ? "dark" : "light"}>
+			<Box>
+				<Text
+					className={theme ? "darkText" : "lightText"}
+					fontWeight="bold"
+					fontSize={{
+						base: "150%",
+						sm: "170%",
+						md: "200%",
+						lg: "300%",
+						xl: "300%",
+					}}
+					padding="1%"
+					width="40%"
+					margin="auto"
+					marginTop="1%"
+					boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
+				>
+					Git Stars
+				</Text>
+			</Box>
+			<Box
+				padding="2%"
+				display="flex"
+				justifyContent="space-between"
+				width="95%"
+				margin="auto"
+			>
+				<Box display="flex" width="25%" border="0.5px solid black">
+					<Select
+						color={theme ? "white" : "black"}
+						bg={theme ? "black" : "white"}
+						width="100%"
+						placeholder="Search"
+						onChange={(e) => handleSearch(e.target.value)}
+					>
+						{allLan.length > 0 &&
+							allLan.map((item, i) => {
+								return (
+									<option
+										style={
+											theme
+												? { color: "white", backgroundColor: "black" }
+												: { color: "black", backgroundColor: "white" }
+										}
+										key={i}
+										value={`${item.value}`}
+									>
+										{item.label}
+									</option>
+								);
+							})}
+					</Select>
+				</Box>
+				<Box
+					display="flex"
+					width={{ base: "60%", sm: "40%", md: "30%", lg: "20%", xl: "20%" }}
+					justifyContent="space-around"
+				>
+					<Button
+						colorScheme={theme ? "black" : "blue"}
+						border="1px solid white"
+						onClick={() => changeView()}
+					>
+						{view ? "Grid View" : "List View"}
+					</Button>
+					<Button
+						colorScheme={theme ? "black" : "pink"}
+						border="1px solid white"
+						onClick={() => handleChangeTheme()}
+					>
+						{theme ? "Light mode" : "Dark mode"}
+					</Button>
+				</Box>
+			</Box>
+			<Box>
+				{repos.length === 0 ? (
+					<Box>Loading...</Box>
+				) : view ? (
+					<Box
+						display="grid"
+						gridTemplateColumns={{ base: "repeat(1,100%)" }}
+						width="80%"
+						margin="auto"
+					>
+						{repos.map((item) => {
+							return (
+								<ListView
+									key={item.id}
+									image={item.owner.avatar_url}
+									fullname={item.full_name}
+									name={item.name}
+									star={item.stargazers_count}
+									date={item.updated_at}
+									description={item.description}
+									fork={item.forks_count}
+									issues={item.open_issues_count}
+									themeChange={theme}
+								/>
+							);
+						})}
+					</Box>
+				) : (
+					<Box
+						display="grid"
+						gridTemplateColumns={{
+							base: "repeat(1,100%)",
+							sm: "repeat(2,50%)",
+							md: "repeat(3,33%)",
+							lg: "repeat(4,25%)",
+							xl: "repeat(4,25%)",
+						}}
+						width="95%"
+						margin="auto"
+					>
+						{repos.map((item) => {
+							return (
+								<GridView
+									key={item.id}
+									image={item.owner.avatar_url}
+									fullname={item.full_name}
+									name={item.name}
+									star={item.stargazers_count}
+									date={item.updated_at}
+									description={item.description}
+									fork={item.forks_count}
+									issues={item.open_issues_count}
+									themeChange={theme}
+								/>
+							);
+						})}
+					</Box>
+				)}
+			</Box>
+			<Box>
+				<Pagination
+					onChange={handlePageChange}
+					page={page}
+					total={localStorage.getItem("total")}
+					theme={theme}
+				/>
+			</Box>
+		</Box>
+	);
 };
 
 export { GitStar };
