@@ -10,7 +10,6 @@ const GitStar = () => {
 	const dispatch = useDispatch();
 	const repos = useSelector((store) => store.repos);
 
-
 	const [view, setView] = useState(false);
 	const [page, setPage] = useState(1);
 	const [theme, setTheme] = useState(false);
@@ -18,8 +17,6 @@ const GitStar = () => {
 	const changeView = () => {
 		setView(!view);
 	};
-
-
 
 	const handleChangeTheme = () => {
 		setTheme(!theme);
@@ -38,8 +35,6 @@ const GitStar = () => {
 			dispatch(getRepos(page));
 		}
 	}, [dispatch, repos, repos.length, page]);
-
-
 
 	return (
 		<Box className={theme ? "dark" : "light"}>
@@ -70,7 +65,6 @@ const GitStar = () => {
 				width="95%"
 				margin="auto"
 			>
-
 				<Box
 					display="flex"
 					width={{ base: "60%", sm: "40%", md: "30%", lg: "20%", xl: "20%" }}

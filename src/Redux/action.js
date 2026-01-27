@@ -17,4 +17,4 @@ const getRepos = (page, lan) => (dispatch) => {
 		});
 };
 
-export {getRepos};
+export { getRepos };
