@@ -1,0 +1,37 @@
+.App {
+  text-align: center;
+  min-height: 100vh;
+}
+
+.dark{
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+}
+
+.light{
+  background-color: white;
+  color: rgb(9, 8, 8);
+}
+
+.darkText{
+  background-color: rgb(24, 0, 0);
+  color: white;
+  border: 1px solid white;
+}
+
+.lightText{
+  background-color: white;
+  color: rgb(9, 8, 8);
+}
+
+.darkCard{
+  background-color: rgb(36, 1, 1);
+  color: white;
+  border: 1px solid white;
+}
+
+.lightCard{
+  background-color: rgb(215, 228, 228);
+  color: rgb(11, 10, 10);
+}
