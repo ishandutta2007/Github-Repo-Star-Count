@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Github-Repo-Star-Count/static/css/main.05b2d5ff.css",
-    "main.js": "/Github-Repo-Star-Count/static/js/main.6c288f5a.js",
+    "main.js": "/Github-Repo-Star-Count/static/js/main.f9f9b654.js",
     "index.html": "/Github-Repo-Star-Count/index.html",
     "main.05b2d5ff.css.map": "/Github-Repo-Star-Count/static/css/main.05b2d5ff.css.map",
-    "main.6c288f5a.js.map": "/Github-Repo-Star-Count/static/js/main.6c288f5a.js.map"
+    "main.f9f9b654.js.map": "/Github-Repo-Star-Count/static/js/main.f9f9b654.js.map"
   },
   "entrypoints": [
     "static/css/main.05b2d5ff.css",
-    "static/js/main.6c288f5a.js"
+    "static/js/main.f9f9b654.js"
   ]
 }
