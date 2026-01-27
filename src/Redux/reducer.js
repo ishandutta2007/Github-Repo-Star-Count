@@ -3,7 +3,6 @@ import * as types from "./actionTypes";
 const prevState = {
 	repos: [],
 	allrepo: [],
-	allLan: [],
 	isLoading: false,
 	isError: false,
 };
@@ -39,19 +38,6 @@ const reducer = (state = prevState, action) => {
 				allrepo: payload,
 			};
 		case types.GET_ALL_GIT_REPOS_FAILURE:
-			return {
-				...state,
-			};
-		case types.GET_ALL_LANGUAGE_REQUEST:
-			return {
-				...state,
-			};
-		case types.GET_ALL_LANGUAGE_SUCCESS:
-			return {
-				...state,
-				allLan: payload,
-			};
-		case types.GET_ALL_LANGUAGE_FAILURE:
 			return {
 				...state,
 			};

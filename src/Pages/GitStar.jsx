@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { GridView } from "../Components/GridView";
 import { ListView } from "../Components/ListView";
 import { Pagination } from "../Components/Pagination";
-import { getAllLang, getRepos } from "../Redux/action";
+import { getRepos } from "../Redux/action";
 
 const GitStar = () => {
 	const dispatch = useDispatch();
 	const repos = useSelector((store) => store.repos);
-	const allLan = useSelector((store) => store.allLan);
+
 
 	const [view, setView] = useState(false);
 	const [page, setPage] = useState(1);
@@ -41,11 +41,7 @@ const GitStar = () => {
 		}
 	}, [dispatch, repos, repos.length]);
 
-	useEffect(() => {
-		if (allLan.length === 0) {
-			dispatch(getAllLang());
-		}
-	}, [dispatch, allLan, allLan.length]);
+
 
 	return (
 		<Box className={theme ? "dark" : "light"}>
@@ -76,32 +72,7 @@ const GitStar = () => {
 				width="95%"
 				margin="auto"
 			>
-				<Box display="flex" width="25%" border="0.5px solid black">
-					<Select
-						color={theme ? "white" : "black"}
-						bg={theme ? "black" : "white"}
-						width="100%"
-						placeholder="Search"
-						onChange={(e) => handleSearch(e.target.value)}
-					>
-						{allLan.length > 0 &&
-							allLan.map((item, i) => {
-								return (
-									<option
-										style={
-											theme
-												? { color: "white", backgroundColor: "black" }
-												: { color: "black", backgroundColor: "white" }
-										}
-										key={i}
-										value={`${item.value}`}
-									>
-										{item.label}
-									</option>
-								);
-							})}
-					</Select>
-				</Box>
+
 				<Box
 					display="flex"
 					width={{ base: "60%", sm: "40%", md: "30%", lg: "20%", xl: "20%" }}
