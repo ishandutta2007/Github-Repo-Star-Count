@@ -1,4 +1,4 @@
-import { Box, Button, Text, Select } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GridView } from "../Components/GridView";
@@ -19,9 +19,7 @@ const GitStar = () => {
 		setView(!view);
 	};
 
-	const handleSearch = (lan) => {
-		dispatch(getRepos(page, lan));
-	};
+
 
 	const handleChangeTheme = () => {
 		setTheme(!theme);
@@ -39,7 +37,7 @@ const GitStar = () => {
 		if (repos.length === 0) {
 			dispatch(getRepos(page));
 		}
-	}, [dispatch, repos, repos.length]);
+	}, [dispatch, repos, repos.length, page]);
 
 
 
