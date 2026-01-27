@@ -2,7 +2,7 @@
 	"name": "mock-10",
 	"version": "0.1.0",
 	"private": true,
-	"homepage": "https://your-github-username.github.io/Github-Repo-Star-Count",
+	"homepage": "https://ishandutta2007.github.io/Github-Repo-Star-Count",
 	"dependencies": {
 		"@chakra-ui/react": "^2.5.1",
 		"@emotion/react": "^11.10.6",
