@@ -45,10 +45,10 @@ Make sure you have the following installed:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/Github-Repo-Star-Count.git
+    git clone https://github.com/ishandutta2007/Github-Repo-Star-Count.git
     cd Github-Repo-Star-Count
     ```
-    *(Replace `your-username` with the actual GitHub username or organization if this is a public repo.)*
+    *(Replace `ishandutta2007` with the actual GitHub username or organization if this is a public repo.)*
 
 2.  **Install dependencies:**
     ```bash
@@ -104,8 +104,8 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📞 Contact
 
-Your Name / Your Project Maintainer - [Your Email/GitHub Profile Link]
-Project Link: [https://github.com/your-username/Github-Repo-Star-Count](https://github.com/your-username/Github-Repo-Star-Count)
+Your Name / Your Project Maintainer - [ishandutta2007@gmail.com/https://github.com/ishandutta2007]
+Project Link: [https://github.com/ishandutta2007/Github-Repo-Star-Count](https://github.com/ishandutta2007/Github-Repo-Star-Count)
 
 ---
 *Keywords: GitHub repository, star count, open source projects, ReactJS, web development, frontend application, developer tool, trending repos, programming languages, Redux, Chakra UI, project discovery, code exploration, JavaScript, find popular repos, GitStars, software projects, API integration, responsive design, dark mode, light mode.*
