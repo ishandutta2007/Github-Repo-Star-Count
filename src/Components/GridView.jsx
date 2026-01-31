@@ -33,29 +33,6 @@ const GridView = ({
 				<Box width="25%">
 					<Image borderRadius="full" boxSize="60px" src={image} alt={name} />
 				</Box>
-				<Box
-					width="75%"
-					paddingLeft="4"
-					display="flex"
-					flexDirection="column"
-				>
-					<Text
-						fontWeight="700"
-						color={accentColor}
-						fontSize="md"
-						textAlign="left"
-					>
-						{name}
-					</Text>
-					<Text
-						fontWeight="500"
-						color={textColor}
-						fontSize="sm"
-						textAlign="left"
-					>
-						View profile
-					</Text>
-				</Box>
 			</Box>
 			<Box width="100%" display="flex" flexDirection="column" marginTop="5">
 				<Text
