@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text, useColorModeValue } from "@chakra-ui/react";
 
 const GridView = ({
 	image,
@@ -9,51 +9,61 @@ const GridView = ({
 	description,
 	fork,
 	issues,
-	themeChange,
 }) => {
+	const cardBg = useColorModeValue("white", "gray.700");
+	const textColor = useColorModeValue("gray.600", "gray.400");
+	const titleColor = useColorModeValue("gray.800", "white");
+	const accentColor = useColorModeValue("blue.500", "blue.300");
+	const infoBg = useColorModeValue("gray.100", "gray.600");
+
 	return (
 		<Box
-			padding="5%"
-			margin="3%"
-			width="90%"
+			bg={cardBg}
+			padding="5"
+			margin="2"
+			width="auto"
 			display="flex"
 			flexDirection="column"
-			className={themeChange ? "darkCard" : "lightCard"}
-			boxShadow="rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset"
+			borderRadius="lg"
+			boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+			borderWidth="1px"
+			borderColor={useColorModeValue("gray.200", "gray.600")}
 		>
-			<Box width="100%" display="flex">
-				<Box width="30%">
-					<Image width="100%" src={image} alt={name} />
+			<Box width="100%" display="flex" alignItems="center">
+				<Box width="25%">
+					<Image borderRadius="full" boxSize="60px" src={image} alt={name} />
 				</Box>
 				<Box
-					width="100%"
-					paddingLeft="2%"
+					width="75%"
+					paddingLeft="4"
 					display="flex"
 					flexDirection="column"
 				>
 					<Text
-						width="100%"
 						fontWeight="700"
-						color="darkred"
-						fontSize="80%"
-						display="block"
+						color={accentColor}
+						fontSize="md"
 						textAlign="left"
 					>
 						{name}
 					</Text>
-					<Text width="100%" fontWeight="500" display="block" textAlign="left">
+					<Text
+						fontWeight="500"
+						color={textColor}
+						fontSize="sm"
+						textAlign="left"
+					>
 						View profile
 					</Text>
 				</Box>
 			</Box>
-			<Box width="100%" display="flex" flexDirection="column" marginTop="5%">
+			<Box width="100%" display="flex" flexDirection="column" marginTop="5">
 				<Text
-					width="100%"
 					display="inline-block"
 					textAlign="left"
 					fontWeight="bold"
-					fontSize="80%"
-					textDecoration="underline"
+					fontSize="lg"
+					color={titleColor}
 					whiteSpace="pre"
 					overflow="hidden"
 					textOverflow="ellipsis"
@@ -64,51 +74,61 @@ const GridView = ({
 					width="100%"
 					display="block"
 					textAlign="left"
-					fontSize="60%"
+					fontSize="xs"
+					color={textColor}
 				>{`Built by ${name} on ${date}`}</Text>
 				<Box
 					display="inline-block"
 					width="100%"
 					whiteSpace="pre"
-					marginTop="2%"
-					fontSize="80%"
+					marginTop="3"
+					fontSize="sm"
 					textAlign="left"
 					overflow="hidden"
 					textOverflow="ellipsis"
+					color={textColor}
 				>
 					{description}
 				</Box>
 			</Box>
-			<Box width="100%" display="flex" justifyContent="left" marginTop="5%">
+			<Box
+				width="100%"
+				display="flex"
+				justifyContent="flex-start"
+				marginTop="5"
+			>
 				<Box
-					border="1px solid green"
-					backgroundColor={themeChange ? "gray.200" : "gray.100"}
-					color={themeChange ? "black" : "blue"}
-					padding="0% 3%"
+					bg={infoBg}
+					color={titleColor}
+					py="1"
+					px="3"
+					borderRadius="md"
 					fontWeight="bold"
-					fontSize="70%"
-					marginRight="2%"
+					fontSize="xs"
+					marginRight="2"
 				>
 					★ {star}
 				</Box>
 				<Box
-					border="1px solid green"
-					backgroundColor={themeChange ? "gray.200" : "gray.100"}
-					color={themeChange ? "black" : "blue"}
-					padding="0% 3%"
+					bg={infoBg}
+					color={titleColor}
+					py="1"
+					px="3"
+					borderRadius="md"
 					fontWeight="bold"
-					fontSize="70%"
-					marginRight="2%"
+					fontSize="xs"
+					marginRight="2"
 				>
 					Forks {fork}
 				</Box>
 				<Box
-					border="1px solid green"
-					backgroundColor={themeChange ? "gray.200" : "gray.100"}
-					color={themeChange ? "black" : "blue"}
-					padding="0% 3%"
+					bg={infoBg}
+					color={titleColor}
+					py="1"
+					px="3"
+					borderRadius="md"
 					fontWeight="bold"
-					fontSize="70%"
+					fontSize="xs"
 				>
 					Issues {issues}
 				</Box>

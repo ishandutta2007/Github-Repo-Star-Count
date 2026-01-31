@@ -1,4 +1,10 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import {
+	Box,
+	Button,
+	Text,
+	useColorMode,
+	useColorModeValue,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GridView } from "../Components/GridView";
@@ -9,17 +15,13 @@ import { getRepos } from "../Redux/action";
 const GitStar = () => {
 	const dispatch = useDispatch();
 	const repos = useSelector((store) => store.repos);
+	const { colorMode, toggleColorMode } = useColorMode();
 
 	const [view, setView] = useState(false);
 	const [page, setPage] = useState(1);
-	const [theme, setTheme] = useState(false);
 
 	const changeView = () => {
 		setView(!view);
-	};
-
-	const handleChangeTheme = () => {
-		setTheme(!theme);
 	};
 
 	const handlePageChange = (n) => {
@@ -36,30 +38,34 @@ const GitStar = () => {
 		}
 	}, [dispatch, repos, repos.length, page]);
 
+	const bg = useColorModeValue("gray.50", "gray.800");
+	const color = useColorModeValue("gray.800", "white");
+	const titleBg = useColorModeValue("white", "gray.700");
+
 	return (
-		<Box className={theme ? "dark" : "light"}>
+		<Box bg={bg} color={color} minH="100vh">
 			<Box>
 				<Text
-					className={theme ? "darkText" : "lightText"}
+					bg={titleBg}
 					fontWeight="bold"
 					fontSize={{
-						base: "150%",
-						sm: "170%",
-						md: "200%",
-						lg: "300%",
-						xl: "300%",
+						base: "2xl",
+						sm: "3xl",
+						md: "4xl",
 					}}
-					padding="1%"
-					width="40%"
+					py="4"
+					width={{ base: "90%", sm: "60%", md: "40%" }}
 					margin="auto"
-					marginTop="1%"
-					boxShadow="rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
+					mt="8"
+					mb="8"
+					boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+					borderRadius="lg"
 				>
 					Git Stars
 				</Text>
 			</Box>
 			<Box
-				padding="2%"
+				padding="4"
 				display="flex"
 				justifyContent="space-between"
 				width="95%"
@@ -71,18 +77,16 @@ const GitStar = () => {
 					justifyContent="space-around"
 				>
 					<Button
-						colorScheme={theme ? "black" : "blue"}
-						border="1px solid white"
+						colorScheme={useColorModeValue("blue", "gray")}
 						onClick={() => changeView()}
 					>
 						{view ? "Grid View" : "List View"}
 					</Button>
 					<Button
-						colorScheme={theme ? "black" : "pink"}
-						border="1px solid white"
-						onClick={() => handleChangeTheme()}
+						colorScheme={useColorModeValue("pink", "purple")}
+						onClick={toggleColorMode}
 					>
-						{theme ? "Light mode" : "Dark mode"}
+						{colorMode === "light" ? "Dark mode" : "Light mode"}
 					</Button>
 				</Box>
 			</Box>
@@ -92,9 +96,10 @@ const GitStar = () => {
 				) : view ? (
 					<Box
 						display="grid"
-						gridTemplateColumns={{ base: "repeat(1,100%)" }}
+						gridTemplateColumns={{ base: "repeat(1, 1fr)" }}
 						width="80%"
 						margin="auto"
+						gap={4}
 					>
 						{repos.map((item) => {
 							return (
@@ -108,7 +113,6 @@ const GitStar = () => {
 									description={item.description}
 									fork={item.forks_count}
 									issues={item.open_issues_count}
-									themeChange={theme}
 								/>
 							);
 						})}
@@ -117,14 +121,15 @@ const GitStar = () => {
 					<Box
 						display="grid"
 						gridTemplateColumns={{
-							base: "repeat(1,100%)",
-							sm: "repeat(2,50%)",
-							md: "repeat(3,33%)",
-							lg: "repeat(4,25%)",
-							xl: "repeat(4,25%)",
+							base: "repeat(1, 1fr)",
+							sm: "repeat(2, 1fr)",
+							md: "repeat(3, 1fr)",
+							lg: "repeat(3, 1fr)",
+							xl: "repeat(3, 1fr)",
 						}}
 						width="95%"
 						margin="auto"
+						gap={4}
 					>
 						{repos.map((item) => {
 							return (
@@ -138,7 +143,6 @@ const GitStar = () => {
 									description={item.description}
 									fork={item.forks_count}
 									issues={item.open_issues_count}
-									themeChange={theme}
 								/>
 							);
 						})}
@@ -150,7 +154,7 @@ const GitStar = () => {
 					onChange={handlePageChange}
 					page={page}
 					total={localStorage.getItem("total")}
-					theme={theme}
+					theme={colorMode === "dark"}
 				/>
 			</Box>
 		</Box>

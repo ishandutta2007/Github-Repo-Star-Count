@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text, useColorModeValue } from "@chakra-ui/react";
 
 const ListView = ({
 	image,
@@ -9,25 +9,32 @@ const ListView = ({
 	description,
 	fork,
 	issues,
-	themeChange,
 }) => {
+	const cardBg = useColorModeValue("white", "gray.700");
+	const textColor = useColorModeValue("gray.600", "gray.400");
+	const titleColor = useColorModeValue("gray.800", "white");
+	const infoBg = useColorModeValue("gray.100", "gray.600");
+
 	return (
 		<Box
-			margin="1%"
-			padding="5%"
+			bg={cardBg}
+			margin="1"
+			padding="5"
 			display="flex"
 			justifyContent="space-between"
-			className={themeChange ? "darkCard" : "lightCard"}
-			boxShadow="rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset"
+			borderRadius="lg"
+			boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
+			borderWidth="1px"
+			borderColor={useColorModeValue("gray.200", "gray.600")}
 		>
-			<Box width="70%">
+			<Box width="85%">
 				<Box width="100%" display="flex" flexDirection="column">
 					<Text
-						width="100%"
 						display="block"
 						textAlign="left"
 						fontWeight="bold"
-						textDecoration="underline"
+						fontSize="xl"
+						color={titleColor}
 					>
 						{fullname}
 					</Text>
@@ -35,17 +42,19 @@ const ListView = ({
 						width="100%"
 						display="block"
 						textAlign="left"
-						fontSize="60%"
+						fontSize="sm"
+						color={textColor}
 					>{`Built by ${name} on ${date}`}</Text>
 					<Box
 						display="inline-block"
 						width="100%"
 						whiteSpace="pre"
-						marginTop="2%"
-						fontSize="80%"
+						marginTop="3"
+						fontSize="sm"
 						textAlign="left"
 						overflow="hidden"
 						textOverflow="ellipsis"
+						color={textColor}
 					>
 						{description}
 					</Box>
@@ -56,50 +65,50 @@ const ListView = ({
 					flexDirection={{
 						base: "column",
 						sm: "row",
-						md: "row",
-						lg: "row",
-						xl: "row",
 					}}
-					justifyContent="left"
-					marginTop="5%"
+					justifyContent="flex-start"
+					marginTop="5"
 				>
 					<Box
-						border="1px solid green"
-						backgroundColor={themeChange ? "red.1000" : "gray.100"}
-						color={themeChange ? "white" : "blue"}
-						padding="0% 3%"
+						bg={infoBg}
+						color={titleColor}
+						py="1"
+						px="3"
+						borderRadius="md"
 						fontWeight="bold"
-						fontSize="70%"
-						margin="2%"
+						fontSize="xs"
+						margin="1"
 					>
 						★ {star}
 					</Box>
 					<Box
-						border="1px solid green"
-						backgroundColor={themeChange ? "red.1000" : "gray.100"}
-						color={themeChange ? "white" : "blue"}
-						padding="0% 3%"
+						bg={infoBg}
+						color={titleColor}
+						py="1"
+						px="3"
+						borderRadius="md"
 						fontWeight="bold"
-						fontSize="70%"
-						margin="2%"
+						fontSize="xs"
+						margin="1"
 					>
 						Forks {fork}
 					</Box>
 					<Box
-						border="1px solid green"
-						backgroundColor={themeChange ? "red.1000" : "gray.100"}
-						color={themeChange ? "white" : "blue"}
-						padding="0% 3%"
+						bg={infoBg}
+						color={titleColor}
+						py="1"
+						px="3"
+						borderRadius="md"
 						fontWeight="bold"
-						fontSize="70%"
-						margin="2%"
+						fontSize="xs"
+						margin="1"
 					>
 						Issues {issues}
 					</Box>
 				</Box>
 			</Box>
 			<Box width="10%">
-				<Image src={image} alt={name} />
+				<Image borderRadius="md" src={image} alt={name} />
 			</Box>
 		</Box>
 	);
