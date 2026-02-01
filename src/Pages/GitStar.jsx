@@ -61,20 +61,27 @@ const GitStar = () => {
 		<Box bg={bg} color={color} minH="100vh">
 			<Box>
 				<Text
-					bg={titleBg}
-					fontWeight="bold"
+					bgGradient={useColorModeValue(
+						"linear(to-r, blue.400, purple.500)",
+						"linear(to-r, gray.700, gray.900)",
+					)}
+					backgroundClip="text"
+					fontWeight="extrabold"
 					fontSize={{
-						base: "2xl",
-						sm: "3xl",
-						md: "4xl",
+						base: "3xl",
+						sm: "4xl",
+						md: "5xl",
 					}}
+					letterSpacing="wide"
 					py="4"
 					width={{ base: "90%", sm: "60%", md: "40%" }}
 					margin="auto"
 					mt="8"
 					mb="8"
-					boxShadow="0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)"
-					borderRadius="lg"
+					boxShadow="dark-lg"
+					borderRadius="full"
+					border="2px solid"
+					borderColor={useColorModeValue("blue.300", "gray.600")}
 				>
 					Git Stars
 				</Text>
