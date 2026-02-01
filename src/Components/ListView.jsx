@@ -15,6 +15,11 @@ const ListView = ({
 	const titleColor = useColorModeValue("gray.800", "white");
 	const infoBg = useColorModeValue("gray.100", "gray.600");
 
+	const truncatedDescription =
+		description && description.length > 350
+			? description.substring(0, 350) + "..."
+			: description;
+
 	return (
 		<Box
 			bg={cardBg}
@@ -56,7 +61,7 @@ const ListView = ({
 											textOverflow="ellipsis"
 											color={textColor}
 										>
-											{description}
+											{truncatedDescription}
 										</Box>				</Box>
 				<Box
 					width="100%"

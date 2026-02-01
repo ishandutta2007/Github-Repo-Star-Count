@@ -16,6 +16,11 @@ const GridView = ({
 	const accentColor = useColorModeValue("blue.500", "blue.300");
 	const infoBg = useColorModeValue("gray.100", "gray.600");
 
+	const truncatedDescription =
+		description && description.length > 350
+			? description.substring(0, 350) + "..."
+			: description;
+
 	return (
 		<Box
 			bg={cardBg}
@@ -63,7 +68,7 @@ const GridView = ({
 					textOverflow="ellipsis"
 					color={textColor}
 				>
-					{description}
+					{truncatedDescription}
 				</Box>
 			</Box>
 			<Box
