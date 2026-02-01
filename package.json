@@ -17,17 +17,15 @@
 		"react-dom": "^18.2.0",
 		"react-redux": "^8.0.5",
 		"react-router-dom": "^6.8.1",
-		"react-scripts": "5.0.1",
 		"redux": "^4.2.1",
 		"redux-thunk": "^2.4.2",
 		"vercel": "^28.16.11",
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"start": "react-scripts start",
-		"build": "react-scripts build",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject",
+		"start": "vite",
+		"build": "vite build",
+		"test": "vitest",
 		"predeploy": "npm run build",
 		"deploy": "gh-pages -d build",
 		"format": "npx @biomejs/biome format --write"
@@ -51,6 +49,9 @@
 		]
 	},
 	"devDependencies": {
-		"@biomejs/biome": "2.3.13"
+		"@biomejs/biome": "2.3.13",
+		"@vitejs/plugin-react": "^5.1.2",
+		"vite": "^7.3.1",
+		"vite-plugin-svgr": "^4.5.0"
 	}
 }
