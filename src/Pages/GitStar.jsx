@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom"; // Import useSearchParams
 import { GridView } from "../Components/GridView";
 import { ListView } from "../Components/ListView";
 import { Pagination } from "../Components/Pagination";
@@ -16,17 +17,29 @@ const GitStar = () => {
 	const dispatch = useDispatch();
 	const repos = useSelector((store) => store.repos);
 	const { colorMode, toggleColorMode } = useColorMode();
+	const [searchParams, setSearchParams] = useSearchParams(); // Get search params
 
 	const [view, setView] = useState(false);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(Number(searchParams.get("page")) || 1); // Get page from URL or default to 1
 
 	const changeView = () => {
 		setView(!view);
 	};
 
-	const handlePageChange = (n) => {
-		setPage((init) => init + n);
+	const handlePageChange = (newPage) => {
+		if (newPage > 0) {
+			setPage(newPage);
+			setSearchParams({ page: newPage });
+		}
 	};
+
+	useEffect(() => {
+		// Update page state if URL changes
+		const urlPage = Number(searchParams.get("page")) || 1;
+		if (urlPage !== page) {
+			setPage(urlPage);
+		}
+	}, [searchParams, page]);
 
 	useEffect(() => {
 		dispatch(getRepos(page));
