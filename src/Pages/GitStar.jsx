@@ -5,6 +5,7 @@ import {
 	useColorMode,
 	useColorModeValue,
 	VStack, // Import VStack
+	Select, // Import Select
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +16,22 @@ import { ListView } from "../Components/ListView";
 import { Pagination } from "../Components/Pagination";
 import { getRepos } from "../Redux/action";
 
+const LANGUAGES = [
+	{ value: "", label: "All Languages" },
+	{ value: "javascript", label: "JavaScript" },
+	{ value: "python", label: "Python" },
+	{ value: "java", label: "Java" },
+	{ value: "go", label: "Go" },
+	{ value: "typescript", label: "TypeScript" },
+	{ value: "c", label: "C" },
+	{ value: "cpp", label: "C++" },
+	{ value: "ruby", label: "Ruby" },
+	{ value: "php", label: "PHP" },
+	{ value: "swift", label: "Swift" },
+	{ value: "kotlin", label: "Kotlin" },
+	{ value: "rust", label: "Rust" },
+];
+
 const GitStar = () => {
 	const dispatch = useDispatch();
 	const repos = useSelector((store) => store.repos);
@@ -23,9 +40,19 @@ const GitStar = () => {
 
 	const [view, setView] = useState(false);
 	const [page, setPage] = useState(Number(searchParams.get("page")) || 1); // Get page from URL or default to 1
+	const [selectedLanguage, setSelectedLanguage] = useState(
+		searchParams.get("lang") || "",
+	); // Get language from URL or default to empty
 
 	const changeView = () => {
 		setView(!view);
+	};
+
+	const handleLanguageChange = (event) => {
+		const newLanguage = event.target.value;
+		setSelectedLanguage(newLanguage);
+		setPage(1); // Reset to first page when language changes
+		setSearchParams({ page: 1, lang: newLanguage }); // Update URL
 	};
 
 	const handlePageChange = (newPage) => {
@@ -40,7 +67,7 @@ const GitStar = () => {
 
 		if (newPage > 0) {
 			setPage(newPage);
-			setSearchParams({ page: newPage });
+			setSearchParams({ page: newPage, lang: selectedLanguage });
 		}
 	};
 
@@ -50,21 +77,25 @@ const GitStar = () => {
 		if (urlPage !== page) {
 			setPage(urlPage);
 		}
-	}, [searchParams, page]);
-
-	useEffect(() => {
-		dispatch(getRepos(page));
-	}, [dispatch, page]);
-
-	useEffect(() => {
-		if (repos.length === 0) {
-			dispatch(getRepos(page));
+		// Update language state if URL changes
+		const urlLang = searchParams.get("lang") || "";
+		if (urlLang !== selectedLanguage) {
+			setSelectedLanguage(urlLang);
 		}
-	}, [dispatch, repos, repos.length, page]);
+	}, [searchParams, page, selectedLanguage]);
+
+	useEffect(() => {
+		dispatch(getRepos(page, selectedLanguage));
+	}, [dispatch, page, selectedLanguage]);
+
+	useEffect(() => {
+		if (repos.length === 0 && page === 1) { // Only fetch if repos are empty and on first page to avoid double fetch on language change
+			dispatch(getRepos(page, selectedLanguage));
+		}
+	}, [dispatch, repos, repos.length, page, selectedLanguage]);
 
 	const bg = useColorModeValue("gray.50", "gray.800");
 	const color = useColorModeValue("gray.800", "white");
-	const titleBg = useColorModeValue("white", "gray.700");
 
 	return (
 		<Box
@@ -75,11 +106,17 @@ const GitStar = () => {
 			color={color}
 			minH="100vh"
 		>
-			<Box>
+			<VStack
+				width={{ base: "90%", sm: "60%", md: "40%" }}
+				margin="auto"
+				mt="8"
+				mb="8"
+				spacing={4}
+			>
 				<Text
 					bgGradient={useColorModeValue(
 						"linear(to-r, blue.400, purple.500)", // Light mode gradient
-						"linear(to-r, teal.200, blue.400)",   // Dark mode gradient (changed colors)
+						"linear(to-r, teal.200, blue.400)", // Dark mode gradient (changed colors)
 					)}
 					backgroundClip="text"
 					fontWeight="extrabold"
@@ -90,10 +127,8 @@ const GitStar = () => {
 					}}
 					letterSpacing="wide"
 					py="4"
-					width={{ base: "90%", sm: "60%", md: "40%" }}
-					margin="auto"
-					mt="8"
-					mb="8"
+					width="100%" // Ensure text takes full width of VStack
+					textAlign="center" // Center text within its own width
 					boxShadow="dark-lg"
 					borderRadius="full"
 					border="2px solid"
@@ -101,7 +136,25 @@ const GitStar = () => {
 				>
 					Github Repo Stars
 				</Text>
-			</Box>
+				<Select
+					placeholder="Select Language"
+					value={selectedLanguage}
+					onChange={handleLanguageChange}
+					bg={useColorModeValue("white", "gray.700")}
+					borderColor={useColorModeValue("gray.200", "gray.600")}
+					_hover={{
+						borderColor: useColorModeValue("blue.300", "purple.300"),
+					}}
+					width="100%" // Ensure select takes full width of VStack
+					maxWidth="xs" // Limit max width for better appearance
+				>
+					{LANGUAGES.map((lang) => (
+						<option key={lang.value} value={lang.value}>
+							{lang.label}
+						</option>
+					))}
+				</Select>
+			</VStack>
 			{/* Floating action buttons */}
 			<VStack
 				position="fixed"
