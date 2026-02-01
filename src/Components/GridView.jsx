@@ -1,4 +1,4 @@
-import { Box, Image, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Image, Text, useColorModeValue, Link } from "@chakra-ui/react";
 
 const GridView = ({
 	image,
@@ -33,17 +33,19 @@ const GridView = ({
 				</Box>
 			</Box>
 			<Box width="100%" display="flex" flexDirection="column" marginTop="5">
-				<Text
-					display="inline-block"
-					textAlign="left"
-					fontWeight="bold"
-					fontSize="lg"
-					color={titleColor}
-					overflow="hidden"
-					textOverflow="ellipsis"
-				>
-					{fullname}
-				</Text>
+				<Link href={`https://github.com/${fullname}`} isExternal textAlign="left">
+					<Text
+						display="inline-block"
+						textAlign="left"
+						fontWeight="bold"
+						fontSize="lg"
+						color={titleColor}
+						overflow="hidden"
+						textOverflow="ellipsis"
+					>
+						{fullname}
+					</Text>
+				</Link>
 				<Text
 					width="100%"
 					display="block"
