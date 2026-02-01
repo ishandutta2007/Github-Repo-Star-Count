@@ -20,8 +20,6 @@ const GridView = ({
 		<Box
 			bg={cardBg}
 			padding="5"
-			margin="2"
-			width="auto"
 			display="flex"
 			flexDirection="column"
 			borderRadius="lg"
@@ -41,7 +39,6 @@ const GridView = ({
 					fontWeight="bold"
 					fontSize="lg"
 					color={titleColor}
-					whiteSpace="pre"
 					overflow="hidden"
 					textOverflow="ellipsis"
 				>
@@ -57,7 +54,6 @@ const GridView = ({
 				<Box
 					display="inline-block"
 					width="100%"
-					whiteSpace="pre"
 					marginTop="3"
 					fontSize="sm"
 					textAlign="left"
