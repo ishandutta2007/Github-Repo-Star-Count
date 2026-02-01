@@ -1,7 +1,7 @@
 import { Box, Button, HStack, Text } from "@chakra-ui/react";
 
 const Pagination = ({ onChange, page, total, theme }) => {
-	const totalPages = Math.ceil(total / 60);
+	const totalPages = Math.ceil(Math.min(total, 1000) / 60);
 
 	const handlePageClick = (newPage) => {
 		if (newPage >= 1 && newPage <= totalPages) {

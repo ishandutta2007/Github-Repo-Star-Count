@@ -29,6 +29,15 @@ const GitStar = () => {
 	};
 
 	const handlePageChange = (newPage) => {
+		const totalFromStorage = Number(localStorage.getItem("total")) || 0;
+		const maxPossibleResults = Math.min(totalFromStorage, 1000);
+		const maxPages = Math.ceil(maxPossibleResults / 60);
+
+		if (newPage > maxPages && maxPages > 0) { // Also check if maxPages is valid
+			alert(`No more results found. GitHub API limits results to the first ${maxPossibleResults} items. There are only ${maxPages} pages available.`);
+			return;
+		}
+
 		if (newPage > 0) {
 			setPage(newPage);
 			setSearchParams({ page: newPage });
