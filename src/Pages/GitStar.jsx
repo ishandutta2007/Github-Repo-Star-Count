@@ -58,12 +58,19 @@ const GitStar = () => {
 	const titleBg = useColorModeValue("white", "gray.700");
 
 	return (
-		<Box bg={bg} color={color} minH="100vh">
+		<Box
+			bgGradient={useColorModeValue(
+				"linear(to-br, gray.50, gray.100)",
+				"linear(to-br, gray.800, gray.900)",
+			)}
+			color={color}
+			minH="100vh"
+		>
 			<Box>
 				<Text
 					bgGradient={useColorModeValue(
-						"linear(to-r, blue.400, purple.500)",
-						"linear(to-r, gray.700, gray.900)",
+						"linear(to-r, blue.400, purple.500)", // Light mode gradient
+						"linear(to-r, teal.200, blue.400)",   // Dark mode gradient (changed colors)
 					)}
 					backgroundClip="text"
 					fontWeight="extrabold"
