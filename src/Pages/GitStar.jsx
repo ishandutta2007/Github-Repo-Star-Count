@@ -101,10 +101,11 @@ const GitStar = () => {
 						margin="auto"
 						gap={4}
 					>
-						{repos.map((item) => {
+						{repos.map((item, index) => {
 							return (
 								<ListView
 									key={item.id}
+									rank={(page - 1) * 60 + index + 1} // Calculate and pass the rank
 									image={item.owner.avatar_url}
 									fullname={item.full_name}
 									name={item.name}
@@ -131,10 +132,11 @@ const GitStar = () => {
 						margin="auto"
 						gap={4}
 					>
-						{repos.map((item) => {
+						{repos.map((item, index) => {
 							return (
 								<GridView
 									key={item.id}
+									rank={(page - 1) * 60 + index + 1} // Calculate and pass the rank
 									image={item.owner.avatar_url}
 									fullname={item.full_name}
 									name={item.name}

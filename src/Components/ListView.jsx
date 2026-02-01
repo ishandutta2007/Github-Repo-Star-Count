@@ -9,6 +9,7 @@ const ListView = ({
 	description,
 	fork,
 	issues,
+	rank, // Added rank to props
 }) => {
 	const cardBg = useColorModeValue("white", "gray.700");
 	const textColor = useColorModeValue("gray.600", "gray.400");
@@ -42,7 +43,7 @@ const ListView = ({
 											fontSize="xl"
 											color={titleColor}
 										>
-											{fullname}
+											{rank}. {fullname}
 										</Text>
 									</Link>					<Text
 						width="100%"
