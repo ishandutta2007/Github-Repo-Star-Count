@@ -99,7 +99,7 @@ const GitStar = () => {
 					border="2px solid"
 					borderColor={useColorModeValue("blue.300", "gray.600")}
 				>
-					Git Stars
+					Github Repo Stars
 				</Text>
 			</Box>
 			{/* Floating action buttons */}
