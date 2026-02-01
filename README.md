@@ -108,4 +108,10 @@ Your Name / Your Project Maintainer - [ishandutta2007@gmail.com/https://github.c
 Project Link: [https://github.com/ishandutta2007/Github-Repo-Star-Count](https://github.com/ishandutta2007/Github-Repo-Star-Count)
 
 ---
+
+### ✨ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=ishandutta2007/Github-Repo-Star-Count&type=date&legend=top-left)](https://www.star-history.com/#ishandutta2007/Github-Repo-Star-Count&type=date&legend=top-left)
+
+---
 *Keywords: GitHub repository, star count, open source projects, ReactJS, web development, frontend application, developer tool, trending repos, programming languages, Redux, Chakra UI, project discovery, code exploration, JavaScript, find popular repos, GitStars, software projects, API integration, responsive design, dark mode, light mode.*
