@@ -35,17 +35,22 @@ const ListView = ({
 		>
 			<Box width="85%">
 				<Box width="100%" display="flex" flexDirection="column">
-									<Link href={`https://github.com/${fullname}`} isExternal textAlign="left">
-										<Text
-											display="block"
-											textAlign="left"
-											fontWeight="bold"
-											fontSize="xl"
-											color={titleColor}
-										>
-											{rank}. {fullname}
-										</Text>
-									</Link>					<Text
+					<Link
+						href={`https://github.com/${fullname}`}
+						isExternal
+						textAlign="left"
+					>
+						<Text
+							display="block"
+							textAlign="left"
+							fontWeight="bold"
+							fontSize="xl"
+							color={titleColor}
+						>
+							{rank}. {fullname}
+						</Text>
+					</Link>{" "}
+					<Text
 						width="100%"
 						display="block"
 						textAlign="left"
@@ -54,16 +59,17 @@ const ListView = ({
 					>{`Built by ${name} on ${date}`}</Text>
 					<Box
 						display="inline-block"
-											width="100%"
-											marginTop="3"
-											fontSize="sm"
-											textAlign="left"
-											overflow="hidden"
-											textOverflow="ellipsis"
-											color={textColor}
-										>
-											{truncatedDescription}
-										</Box>				</Box>
+						width="100%"
+						marginTop="3"
+						fontSize="sm"
+						textAlign="left"
+						overflow="hidden"
+						textOverflow="ellipsis"
+						color={textColor}
+					>
+						{truncatedDescription}
+					</Box>{" "}
+				</Box>
 				<Box
 					width="100%"
 					display="flex"

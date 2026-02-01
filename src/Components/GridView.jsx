@@ -39,7 +39,11 @@ const GridView = ({
 				</Box>
 			</Box>
 			<Box width="100%" display="flex" flexDirection="column" marginTop="5">
-				<Link href={`https://github.com/${fullname}`} isExternal textAlign="left">
+				<Link
+					href={`https://github.com/${fullname}`}
+					isExternal
+					textAlign="left"
+				>
 					<Text
 						display="inline-block"
 						textAlign="left"
