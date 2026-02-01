@@ -4,10 +4,12 @@ import {
 	Text,
 	useColorMode,
 	useColorModeValue,
+	VStack, // Import VStack
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom"; // Import useSearchParams
+import { BsGridFill, BsListUl, BsMoonFill, BsSunFill } from "react-icons/bs"; // Import Icons
 import { GridView } from "../Components/GridView";
 import { ListView } from "../Components/ListView";
 import { Pagination } from "../Components/Pagination";
@@ -77,32 +79,27 @@ const GitStar = () => {
 					Git Stars
 				</Text>
 			</Box>
-			<Box
-				padding="4"
-				display="flex"
-				justifyContent="space-between"
-				width="95%"
-				margin="auto"
+			{/* Floating action buttons */}
+			<VStack
+				position="fixed"
+				bottom="4"
+				right="4"
+				spacing="4"
+				zIndex="overlay"
 			>
-				<Box
-					display="flex"
-					width={{ base: "60%", sm: "40%", md: "30%", lg: "20%", xl: "20%" }}
-					justifyContent="space-around"
+				<Button
+					colorScheme={useColorModeValue("blue", "gray")}
+					onClick={() => changeView()}
 				>
-					<Button
-						colorScheme={useColorModeValue("blue", "gray")}
-						onClick={() => changeView()}
-					>
-						{view ? "Grid View" : "List View"}
-					</Button>
-					<Button
-						colorScheme={useColorModeValue("pink", "purple")}
-						onClick={toggleColorMode}
-					>
-						{colorMode === "light" ? "Dark mode" : "Light mode"}
-					</Button>
-				</Box>
-			</Box>
+					{view ? <BsGridFill /> : <BsListUl />}
+				</Button>
+				<Button
+					colorScheme={useColorModeValue("pink", "purple")}
+					onClick={toggleColorMode}
+				>
+					{colorMode === "light" ? <BsMoonFill /> : <BsSunFill />}
+				</Button>
+			</VStack>
 			<Box>
 				{repos.length === 0 ? (
 					<Box>Loading...</Box>
